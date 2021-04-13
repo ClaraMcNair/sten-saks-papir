@@ -61,23 +61,15 @@ def make_move():
     prediction = model.predict(data)
     print(prediction)
    
-    moves= ['nothing','rock', 'paper','scissors'] 
+    moves= ['Nothing','Stone','Paper','Scissors'] 
+    pred = list(prediction[0])
     
-    """
-    pred = prediction[0]
-    biggest = max(pred)
-    predindex = pred.index(biggest)
-    user_move = moves[predindex]
-    """
-    """
-    pred = prediction[0]
-    max = 0
-    for x in range (0, len(pred)):
-        if (pred[max] < pred[x]):
-            max = (pred[x]) 
-    user_move = moves[max]
-    """
-    user_move = 'Paper'
+    biggest = pred.index(max(pred))
+    #predindex = pred.index(biggest)
+    user_move = moves[biggest]
+    
+    
+    #user_move = 'Paper'
     print(user_move)
     if (user_move == 'Nothing'):
         make_move()
