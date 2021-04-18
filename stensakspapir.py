@@ -21,7 +21,7 @@ def make_move():
     timePassed = time.time()
     
     # capture video and count down for 5 seconds while showing the count
-    while(timePassed - timeStart < 3):
+    while(timePassed - timeStart < 5):
         count = str(int(5 - (timePassed-timeStart)))
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -61,7 +61,7 @@ def make_move():
     prediction = model.predict(data)
     print(prediction)
    
-    moves= ['Nothing','Stone','Paper','Scissors'] 
+    moves= ['Nothing','Stone','Scissors','Paper'] 
     pred = list(prediction[0])
     
     biggest = pred.index(max(pred))
