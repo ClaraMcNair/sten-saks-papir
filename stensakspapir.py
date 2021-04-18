@@ -15,7 +15,7 @@ model = tensorflow.keras.models.load_model('keras_model.h5')
 # determined by the first position in the shape tuple, in this case 1.
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-
+#method for the user to make a move
 def make_move():
     timeStart = time.time()
     timePassed = time.time()
@@ -61,37 +61,41 @@ def make_move():
     prediction = model.predict(data)
     print(prediction)
    
-    moves= ['Nothing','Stone','Scissors','Paper'] 
-    pred = list(prediction[0])
+    moves= ['Nothing','Stone','Scissors','Paper'] #String-list with the moves' names placed at the same index, as in the model
+    pred = list(prediction[0]) #list of all the values of the prediction
     
-    biggest = pred.index(max(pred))
+    biggest = pred.index(max(pred)) #find the index of largest value
     #predindex = pred.index(biggest)
-    user_move = moves[biggest]
+    user_move = moves[biggest]#cast the users move into a string, by finding the item at the same index in our String-list of moves
     
     
-    #user_move = 'Paper'
+   
     print(user_move)
-    if (user_move == 'Nothing'):
+    if (user_move == 'Nothing'): #try again if no move is detected
         make_move()
     else:
-        Result(user_move,Computer_makemove())
+        Result(user_move,Computer_makemove()) #if a move is detected, run the Result()-method with the user-move and a call to Computer_makemove as its arguments.
     
-
+#method for the computer to make a random move
 def Computer_makemove():
    computer_move = random.choice(('Stone', 'Paper', 'Scissors'))
    print(computer_move)
    return (computer_move)
 
+#method for getting the result
 def Result(user_move, computer_move):
-  
+ 
+#all possible outcomes where the computer wins
   if (user_move == 'Stone' and computer_move == 'Paper') or (user_move == 'Scissors' and computer_move == 'Stone') or (user_move == 'Paper' and computer_move == 'Scissors'): 
         winner = "Computer"
         print ('The winner is: ' + winner) 
-         
+        
+    #all possible outcomes where the user wins     
   elif (user_move == 'Stone' and computer_move == 'Scissors') or (user_move == 'Scissors' and computer_move == 'Paper') or (user_move == 'Paper' and computer_move == 'Stone'): 
         winner = "User"
         print ('The winner is: ' + winner)
         
+  #if neither of those otcomes occur, the game is tied.        
   else:
     winner = "It is a TIE"
     print(winner)
