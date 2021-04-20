@@ -5,7 +5,7 @@ import tensorflow.keras
 from PIL import Image, ImageOps
 import random
 
-#All code regarding the ML-model (line 12-17) came with model that we trained and downloaded from https://teachablemachine.withgoogle.com/
+#All code regarding the ML-model (line 10-17 & 44-61) came with model that we trained and downloaded from https://teachablemachine.withgoogle.com/
 
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
