@@ -101,15 +101,18 @@ def Result(user_move, computer_move, frame):
     font = cv2.FONT_HERSHEY_SIMPLEX  
     cv2.putText(frame, "Computers move: " + computer_move,(10,100),font,2,(255,0,0),2,cv2.LINE_AA)
     cv2.putText(frame, "Your move: " + user_move,(10,150),font,2,(255,0,0),2,cv2.LINE_AA)
-    cv2.putText(frame, winner,(10,250),font,4,(255,0,0),2,cv2.LINE_AA)
-    cv2.putText(frame, "Play again press key 0 " + user_move,(10,550),font,2,(255,0,0),2,cv2.LINE_AA)
-    cv2.putText(frame, "To quit press key Q " + user_move,(10,600),font,2,(255,0,0),2,cv2.LINE_AA)
+    cv2.putText(frame, winner,(10,280),font,4,(255,0,0),2,cv2.LINE_AA)
+    cv2.putText(frame, "Play again press key A ",(10,650),font,1,(0,0,255),2,cv2.LINE_AA)
+    cv2.putText(frame, "To quit press key Q ",(10,700),font,1,(0,0,255),2,cv2.LINE_AA)
     cv2.imshow('Rock, paper, scissor', frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    k = cv2.waitKey(0)
+    if k == ord('a'):
         cv2.destroyAllWindows()
         make_move()
-    elif cv2.waitKey(1) & 0xFF == ord('n'):
+    elif k == ord('q'):
+        cv2.destroyAllWindows()
+    else:
         cv2.destroyAllWindows()
     
         
