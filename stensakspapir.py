@@ -79,7 +79,7 @@ def make_move():
         make_move()
     # Otherwise, if move is detected the result function is run
     else:
-        Result(user_move,Computer_makemove(),frame) #if a move is detected, run the Result()-method with the user-move and a call to Computer_makemove as its arguments.
+        Result(user_move,Computer_makemove(),frame)
     
 #method for the computer to make a random move
 def Computer_makemove():
