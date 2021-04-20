@@ -5,11 +5,11 @@ import tensorflow.keras
 from PIL import Image, ImageOps
 import random
 
-cap = cv2.VideoCapture(0)
+
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
 # Load the model
-model = tensorflow.keras.models.load_model('keras_model.h5')
+model = tensorflow.keras.models.load_model('keras_model2.h5')
 # Create the array of the right shape to feed into the keras model
 # The 'length' or number of images you can put into the array is
 # determined by the first position in the shape tuple, in this case 1.
@@ -17,6 +17,7 @@ data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
 #method for the user to make a move
 def make_move():
+    cap = cv2.VideoCapture(0)
     timeStart = time.time()
     timePassed = time.time()
     
@@ -25,6 +26,7 @@ def make_move():
         count = str(int(5 - (timePassed-timeStart)))
         # Capture frame-by-frame
         ret, frame = cap.read()
+        frame = cv2.flip(frame,1)
         # Display the resulting frame
         font = cv2.FONT_HERSHEY_SIMPLEX  
         cv2.putText(frame, count,(10,500),font,4,(255,255,255),2,cv2.LINE_AA)
@@ -40,7 +42,7 @@ def make_move():
     
     #resize the image to a 224x224 with the same strategy as in TM2:
     #resizing the image to be at least 224x224 and then cropping from the center
-    print(image.shape)
+    #print(image.shape)
     size = (224, 224)
     #image = ImageOps.fit(image, size, Image.ANTIALIAS)
     image = ImageOps.fit(Image.fromarray(image), size, Image.ANTIALIAS)
@@ -49,7 +51,7 @@ def make_move():
     image_array = np.asarray(image)
     
     # display the resized image
-    image.show()
+    #image.show()
     
     # Normalize the image
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
