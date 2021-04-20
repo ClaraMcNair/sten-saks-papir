@@ -98,7 +98,8 @@ def Result(user_move, computer_move, frame):
     #if neither of those otcomes occur, the game is tied.        
     else:
         winner = "It is a TIE"
-        
+     
+    #text that displays the result and the option to play again or quit
     font = cv2.FONT_HERSHEY_SIMPLEX  
     cv2.putText(frame, "Computers move: " + computer_move,(10,100),font,2,(255,0,0),2,cv2.LINE_AA)
     cv2.putText(frame, "Your move: " + user_move,(10,150),font,2,(255,0,0),2,cv2.LINE_AA)
@@ -106,7 +107,8 @@ def Result(user_move, computer_move, frame):
     cv2.putText(frame, "Play again press key A ",(10,650),font,1,(0,0,255),2,cv2.LINE_AA)
     cv2.putText(frame, "To quit press key Q ",(10,700),font,1,(0,0,255),2,cv2.LINE_AA)
     cv2.imshow('Rock, paper, scissor', frame)
-
+    
+#playing again or quitting is determined by wether the user presses 'a' or 'q'
     k = cv2.waitKey(0)
     if k == ord('a'):
         cv2.destroyAllWindows()
