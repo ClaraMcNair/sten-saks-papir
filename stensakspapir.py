@@ -70,7 +70,7 @@ def make_move():
     print(user_move)
     if (user_move == 'Nothing'): #try again if no move is detected
         cv2.putText(frame, "No move detected!",(10,150),font,2,(255,0,0),2,cv2.LINE_AA)
-        cv2.putText(frame, "Press key 0 to try again!",(10,200),font,2,(255,0,0),2,cv2.LINE_AA)
+        cv2.putText(frame, "Press any key to try again!",(10,200),font,2,(255,0,0),2,cv2.LINE_AA)
         cv2.imshow('Rock, paper, scissor',frame)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
