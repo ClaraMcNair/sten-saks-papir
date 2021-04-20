@@ -5,7 +5,7 @@ import tensorflow.keras
 from PIL import Image, ImageOps
 import random
 
-#All code regarding the ML-model (line 10-17 & 44-61) came with model that we trained and downloaded from https://teachablemachine.withgoogle.com/
+#All code regarding the ML-model (line 10-17 & 44-59) came with model that we trained and downloaded from https://teachablemachine.withgoogle.com/
 
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
@@ -43,7 +43,6 @@ def make_move():
     
     #resize the image to a 224x224 with the same strategy as in TM2:
     #resizing the image to be at least 224x224 and then cropping from the center
-    
     size = (224, 224)
     image = ImageOps.fit(Image.fromarray(image), size, Image.ANTIALIAS)
 
@@ -58,40 +57,43 @@ def make_move():
 
     # run the inference
     prediction = model.predict(data)
-    print(prediction)
-   
-    moves= ['Nothing','Rock','Scissors','Paper'] #String-list with the moves' names placed at the same index, as in the model
-    pred = list(prediction[0]) #list of all the values of the prediction
-    
-    biggest = pred.index(max(pred)) #find the index of largest value
-    
-    user_move = moves[biggest]#cast the users move into a string, by finding the item at the same index in our String-list of moves  
-   
-    print(user_move)
-    if (user_move == 'Nothing'): #try again if no move is detected
+
+
+    #String-list with the moves' names placed at the same index, as in the model
+    moves= ['Nothing','Rock','Scissors','Paper'] 
+    #list of all the values of the prediction
+    pred = list(prediction[0]) 
+    #find the index of largest value
+    biggest = pred.index(max(pred)) 
+    #cast the users move into a string, by finding the item at the same index in our String-list of moves  
+    user_move = moves[biggest]
+
+    # If no move is detected, message is shown to user
+    # and user can try again by pressing a key
+    if (user_move == 'Nothing'): 
         cv2.putText(frame, "No move detected!",(10,150),font,2,(255,0,0),2,cv2.LINE_AA)
         cv2.putText(frame, "Press any key to try again!",(10,200),font,2,(255,0,0),2,cv2.LINE_AA)
         cv2.imshow('Rock, paper, scissor',frame)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
         make_move()
+    # Otherwise, if move is detected the result function is run
     else:
         Result(user_move,Computer_makemove(),frame) #if a move is detected, run the Result()-method with the user-move and a call to Computer_makemove as its arguments.
     
 #method for the computer to make a random move
 def Computer_makemove():
    computer_move = random.choice(('Rock', 'Paper', 'Scissors'))
-   print(computer_move)
    return (computer_move)
 
 #method for getting the result
 def Result(user_move, computer_move, frame):
     winner = ''
-#all possible outcomes where the computer wins
+    # all possible outcomes where the computer wins
     if (user_move == 'Rock' and computer_move == 'Paper') or (user_move == 'Scissors' and computer_move == 'Rock') or (user_move == 'Paper' and computer_move == 'Scissors'): 
             winner = "the Computer won!"
             
-        #all possible outcomes where the user wins     
+    #all possible outcomes where the user wins     
     elif (user_move == 'Rock' and computer_move == 'Scissors') or (user_move == 'Scissors' and computer_move == 'Paper') or (user_move == 'Paper' and computer_move == 'Rock'): 
             winner = "You won!"
             
@@ -108,7 +110,7 @@ def Result(user_move, computer_move, frame):
     cv2.putText(frame, "To quit press key Q ",(10,700),font,1,(0,0,255),2,cv2.LINE_AA)
     cv2.imshow('Rock, paper, scissor', frame)
     
-#playing again or quitting is determined by wether the user presses 'a' or 'q'
+    #playing again or quitting is determined by wether the user presses 'a' or 'q'
     k = cv2.waitKey(0)
     if k == ord('a'):
         cv2.destroyAllWindows()
